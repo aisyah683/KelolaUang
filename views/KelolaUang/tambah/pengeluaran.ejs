@@ -1,0 +1,89 @@
+<% layout("layouts/boilerplate") %>
+
+<h3 class="text-center mb-3">Tambah Pengeluaran</h3>
+<form action="/KelolaUang" method="POST" class="needs-validation" novalidate>
+  <div class="form-row">
+    <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3 mb-3">
+      <label for="tgl">Tanggal Transaksi</label>
+      <input
+        type="date"
+        class="form-control"
+        name="transaksi[tanggal]"
+        id="tgl"
+        required
+      />
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3 mb-3">
+      <label for="kategori">Kategori</label>
+      <select
+        class="custom-select"
+        name="transaksi[kategori]"
+        id="kategori"
+        required
+      >
+        <option value="" disabled selected>Pilih Kategori</option>
+        <option value="Makanan/Minuman">Makanan/Minuman</option>
+        <option value="Transportasi">Transportasi</option>
+        <option value="Berbelanja">Berbelanja</option>
+        <option value="Hiburan">Hiburan</option>
+        <option value="Liburan">Liburan</option>
+        <option value="Rumah">Rumah</option>
+        <option value="Kesehatan">Kesehatan</option>
+        <option value="Kebutuhan Sehari-Hari">Kebutuhan Sehari-Hari</option>
+        <option value="Lainnya">Lainnya</option>
+      </select>
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3 mb-3">
+      <label for="ket">Keterangan</label>
+      <input
+        type="text"
+        name="transaksi[keterangan]"
+        class="form-control"
+        id="ket"
+        required
+      />
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3 mb-3">
+      <label for="nominal">Nominal</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Rp</span>
+        </div>
+        <input
+          type="text"
+          name="transaksi[nominal]"
+          class="form-control"
+          id="nominal"
+          required
+        />
+      </div>
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-md-4 offset-md-2 col-lg-3 offset-lg-3">
+      <a href="/KelolaUang/rekening" class="btn btn-danger btn-block">
+        Batal
+      </a>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <button class="btn btn-success btn-block">Simpan</button>
+    </div>
+  </div>
+</form>
+
+<script src="/javascript/validasi.js"></script>
+<script src="/javascript/nominal.js"></script>

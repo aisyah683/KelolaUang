@@ -1,0 +1,60 @@
+<% layout("layouts/boilerplate") %>
+
+<h3 class="text-center mb-3">Transaksi</h3>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th class="text-center">No</th>
+      <th class="text-center">Tanggal Transaksi</th>
+      <th class="text-center">Jenis Transaksi</th>
+      <th class="text-center">Kategori</th>
+      <th class="text-center">Keterangan</th>
+      <th class="text-center">Nominal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- tentukan variabel  -->
+    <% let no = 1; let totalPemasukan = 0; let totalPengeluaran = 0; %>
+    <!-- pengulangan untuk menampilkan isi transaksi -->
+    <% for(let isi of transaksi) { %>
+    <!-- logika jika jenis pemasukan -->
+    <% if (isi.jenis === "Pemasukan") { totalPemasukan += isi.nominal; } else {
+    totalPengeluaran += isi.nominal; } %>
+    <tr>
+      <td><%= no++ %></td>
+      <td>
+        <%= new Intl.DateTimeFormat('id-ID',{day: "2-digit", month: "long",
+        year: "numeric"}).format(new Date(isi.tanggal)) %>
+      </td>
+      <td><%= isi.jenis %></td>
+      <td><%= isi.kategori %></td>
+      <td><%= isi.keterangan %></td>
+
+      <% if (isi.jenis === "Pemasukan") { %>
+      <td class="text-right text-success font-weight-bold">
+        <%= isi.nominal.toLocaleString('id-ID') %>
+      </td>
+      <% } else { %>
+      <td class="text-right text-danger font-weight-bold">
+        - <%= isi.nominal.toLocaleString('id-ID') %>
+      </td>
+      <% } %>
+    </tr>
+    <% } %>
+
+    <tr style="font-size: large">
+      <td colspan="5"><strong>Saldo Akhir</strong></td>
+      <td class="text-right">
+        <% let total = (totalPemasukan - totalPengeluaran); if(total<0){%>
+        <strong class="text-danger">
+          <%= total.toLocaleString('id-ID') %>
+        </strong>
+        <% } else { %>
+        <strong class="text-success"
+          ><%= total.toLocaleString('id-ID') %>
+        </strong>
+        <% } %>
+      </td>
+    </tr>
+  </tbody>
+</table>
