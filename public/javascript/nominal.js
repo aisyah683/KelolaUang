@@ -6,3 +6,6 @@ nominal.addEventListener("input", function (e) {
   // mengubah nilai input sesuai format
   e.target.value = new Intl.NumberFormat("id-ID").format(value);
 });
+
+const el = document.getElementById("tgl");
+el.value = new Date().toISOString().slice(0, 10);

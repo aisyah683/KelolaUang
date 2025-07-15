@@ -14,7 +14,6 @@ module.exports.savePemasukan = async (req, res) => {
   req.body.transaksi.jenis = "Pemasukan";
 
   const transaksi = new Transaksi(req.body.transaksi);
-  console.log(transaksi);
   await transaksi.save();
   res.redirect("/KelolaUang");
 };
@@ -33,7 +32,6 @@ module.exports.savePengeluaran = async (req, res) => {
   req.body.transaksi.jenis = "Pengeluaran";
 
   const transaksi = new Transaksi(req.body.transaksi);
-  console.log(transaksi);
   await transaksi.save();
   res.redirect("/KelolaUang");
 };

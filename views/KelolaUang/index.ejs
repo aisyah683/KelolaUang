@@ -1,59 +1,63 @@
-<% layout('layouts/boilerplate') %> <% let totalpemasukan = 0; let
-totalpengeluaran = 0; for (let isi of transaksi) { if (isi.jenis == "Pemasukan")
-{ totalpemasukan += isi.nominal; } else { totalpengeluaran += isi.nominal; } }
-%>
+<% layout('layouts/boilerplate') %>
 
 <a class="row" href="/KelolaUang/rekening" style="text-decoration: none">
   <div class="col-lg-10 offset-lg-1">
     <div class="card border-info mb-3">
       <div class="card-header text-white bg-info">
-        <h3 class="text-center">REKENING</h3>
+        <h3 class="text-center">TOTAL SALDO DIREKENING</h3>
       </div>
-      <div class="card-body text-info bg-white">
-        <h1
-          class="card-title display-4 font-weight-bold d-flex justify-content-between"
-        >
-          <span>Rp</span>
-          <span> <%= totalpemasukan.toLocaleString("id-ID") %> </span>
-        </h1>
+      <div class="card-body text-info">
+        <% let total=0; for (let rek of rekening) { total += rek.nominal } %>
+        <h1 class="text-center">Rp <%= total.toLocaleString("id-ID") %></h1>
       </div>
     </div>
   </div>
 </a>
 
-<div class="row">
-  <div class="col-lg-10 offset-lg-1">
-    <div class="card border-danger mb-3">
-      <div class="card-header text-white bg-danger">
-        <h3 class="text-center">TOTAL PENGELUARAN</h3>
-      </div>
-      <div class="card-body text-danger bg-white">
-        <h1
-          class="card-title display-4 font-weight-bold d-flex justify-content-between"
-        >
-          <span>Rp</span>
-          <span> <%= totalpengeluaran.toLocaleString("id-ID") %> </span>
-        </h1>
-      </div>
-    </div>
-  </div>
-</div>
+<% let totalpemasukan = 0; let totalpengeluaran = 0; for (let isi of transaksi)
+{ if (isi.jenis === "Pemasukan") { totalpemasukan += isi.nominal; } else {
+totalpengeluaran += isi.nominal; } } %>
 
 <div class="row">
   <div class="col-lg-10 offset-lg-1">
     <div class="card border-info mb-3">
       <div class="card-header text-white bg-info">
-        <h3 class="text-center">SALDO AKHIR</h3>
+        <h3 class="text-center">RINGKASAN</h3>
       </div>
-      <div class="card-body text-info bg-white">
-        <h1
-          class="card-title display-4 font-weight-bold d-flex justify-content-between"
-        >
-          <span>Rp</span>
-          <span>
-            <%= (totalpemasukan-totalpengeluaran).toLocaleString("id-ID") %>
-          </span>
-        </h1>
+      <div class="card-body">
+        <!-- Pemasukan -->
+        <div class="row">
+          <div class="col text-info bg-white"><h2>Pemasukan</h2></div>
+          <div class="col text-success bg-white">
+            <h2 class="text-right">
+              Rp <%= totalpemasukan.toLocaleString("id-ID") %>
+            </h2>
+          </div>
+        </div>
+
+        <!-- Pengeluaran -->
+        <div class="row">
+          <div class="col text-info bg-white"><h2>Pengeluaran</h2></div>
+          <div class="col text-danger bg-white">
+            <h2 class="text-right">
+              Rp <%= totalpengeluaran.toLocaleString("id-ID") %>
+            </h2>
+          </div>
+        </div>
+
+        <!-- Total -->
+        <% const selisih = totalpemasukan - totalpengeluaran; %>
+        <!-- khusus untuk hasilnya yang pasti, tidak membutuhkan perhitungan yang rumit  -->
+        <% const warna = selisih < 0 ? 'text-danger' : 'text-success'; %>
+
+        <div class="row">
+          <div class="col text-info bg-white"><h2>Total</h2></div>
+          <div class="col <%= warna %> bg-white">
+            <h2 class="text-right">
+              Rp <%= selisih.toLocaleString("id-ID") %>
+            </h2>
+          </div>
+        </div>
       </div>
     </div>
   </div>

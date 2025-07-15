@@ -2,8 +2,13 @@ const express = require("express");
 const router = express.Router();
 const Rekening = require("../controllers/rekening");
 const tambahData = require("../controllers/tambahData");
+const kelolaUang = require("../controllers/kelolaUang");
 
 // Home
+router.get("/", kelolaUang.home);
+
+// transaksi
+router.get("/transaksi", kelolaUang.transaksi);
 
 // rekening
 router.get("/rekening", Rekening.rekDetail);
