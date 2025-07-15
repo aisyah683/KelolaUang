@@ -1,35 +1,25 @@
 const express = require("express");
-const route = express.Router();
-const Transaksi = require("../controllers/pengeluaran");
+const router = express.Router();
 const Rekening = require("../controllers/rekening");
+const tambahData = require("../controllers/tambahData");
 
-// home
-app.get("/", async (req, res) => {
-  const transaksi = await Transaksi.find({});
-  res.render("KelolaUang/index", { transaksi });
-});
+// Home
 
 // rekening
-app.get("rekening", async (req, res) => {
-  const rekening = await Rekening.find({});
-  res.render("KelolaUang/rekening/detail", { rekening });
-});
+router.get("/rekening", Rekening.rekDetail);
+router.route("/rekening/new").get(Rekening.rekNew).post(Rekening.rekSave);
+router
+  .route("/rekening/:id")
+  .put(Rekening.rekSaveEdit)
+  .delete(Rekening.rekDelete);
+router.get("/rekening/:id/edit", Rekening.rekEdit);
 
-app.get("rekening/new", (req, res) => {
-  res.render("KelolaUang/rekening/new");
-});
+// pemasukan
+router.get("/pemasukan", tambahData.newPemasukan);
+router.post("/pemasukan", tambahData.savePemasukan);
 
-app.post("rekening/new", async (req, res) => {
-  const nominal = req.body.rekening.nominal;
-  let nominalNumber = Number(nominal.replace(/\./g, "")); // hilangkan titik
-  req.body.rekening.nominal = nominalNumber;
-  const rekening = new Rekening(req.body.rekening);
-  await rekening.save();
-  res.redirect("/KelolaUang/rekening");
-});
+// pengeluaran
+router.get("/pengeluaran", tambahData.newPengeluaran);
+router.post("/pengeluaran", tambahData.savePengeluaran);
 
-// transaksi
-app.get("/transaksi", async (req, res) => {
-  const transaksi = await Transaksi.find({});
-  res.render("KelolaUang/transaksi", { transaksi });
-});
+module.exports = router;

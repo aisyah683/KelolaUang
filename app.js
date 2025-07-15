@@ -3,7 +3,8 @@ const app = express();
 const path = require("path");
 const ejsMate = require("ejs-mate");
 const mongoose = require("mongoose");
-const rekeningRoutes = require("./routes/rekening");
+const kelolaUangRoutes = require("./routes/kelolaUang");
+const methodOverride = require("method-override");
 
 // koneksi
 mongoose
@@ -17,9 +18,10 @@ app.set("view engine", "ejs");
 
 app.use(express.urlencoded({ extended: true })); // untuk ngepost
 app.use(express.static(path.join(__dirname, "public")));
+app.use(methodOverride("_method"));
 
 // menggunakan router
-app.use("/KelolaUang/rekening", rekeningRoutes);
+app.use("/KelolaUang", kelolaUangRoutes);
 
 app.listen(3000, () => {
   console.log("BERADA DI PORT 3000");
