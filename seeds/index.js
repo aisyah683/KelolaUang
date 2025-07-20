@@ -13,6 +13,7 @@ const seedDB = async () => {
   for (let isi of transaksi) {
     const addTransaksi = new transaksiModel({
       tanggal: isi["tanggal"],
+      rekening: "68750403b0d1468836702fdb",
       jenis: isi["jenis"],
       kategori: isi["kategori"],
       keterangan: isi["keterangan"],

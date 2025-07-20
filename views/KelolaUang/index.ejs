@@ -27,8 +27,8 @@ totalpengeluaran += isi.nominal; } } %>
       <div class="card-body">
         <!-- Pemasukan -->
         <div class="row">
-          <div class="col text-info bg-white"><h2>Pemasukan</h2></div>
-          <div class="col text-success bg-white">
+          <div class="col-4 text-info bg-white"><h2>Pemasukan</h2></div>
+          <div class="col-8 text-success bg-white">
             <h2 class="text-right">
               Rp <%= totalpemasukan.toLocaleString("id-ID") %>
             </h2>
@@ -37,8 +37,8 @@ totalpengeluaran += isi.nominal; } } %>
 
         <!-- Pengeluaran -->
         <div class="row">
-          <div class="col text-info bg-white"><h2>Pengeluaran</h2></div>
-          <div class="col text-danger bg-white">
+          <div class="col-4 text-info bg-white"><h2>Pengeluaran</h2></div>
+          <div class="col-8 text-danger bg-white">
             <h2 class="text-right">
               Rp <%= totalpengeluaran.toLocaleString("id-ID") %>
             </h2>
@@ -51,8 +51,8 @@ totalpengeluaran += isi.nominal; } } %>
         <% const warna = selisih < 0 ? 'text-danger' : 'text-success'; %>
 
         <div class="row">
-          <div class="col text-info bg-white"><h2>Total</h2></div>
-          <div class="col <%= warna %> bg-white">
+          <div class="col-4 text-info bg-white"><h2>Total</h2></div>
+          <div class="col-8 <%= warna %> bg-white">
             <h2 class="text-right">
               Rp <%= selisih.toLocaleString("id-ID") %>
             </h2>

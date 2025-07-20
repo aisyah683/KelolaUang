@@ -23,6 +23,24 @@
 
   <div class="form-row">
     <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3 mb-3">
+      <label for="kategori">Rekening</label>
+      <select
+        class="custom-select"
+        name="transaksi[rekening]"
+        id="kategori"
+        required
+      >
+        <option value="" disabled selected>Pilih Rekening</option>
+        <% for(let rek of rekening) { %>
+        <option value="<%= rek._id %>"><%= rek.nama %></option>
+        <%} %>
+      </select>
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3 mb-3">
       <label for="kategori">Kategori</label>
       <select
         class="custom-select"
@@ -93,4 +111,4 @@
 </form>
 
 <script src="/javascript/validasi.js"></script>
-<script src="/javascript/nominal.js"></script>
+<script src="/javascript/form.js"></script>
